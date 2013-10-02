@@ -124,6 +124,7 @@
 
 \newcommand{\pc}[2]{\parencite[#1]{#2}}
 \newcommand{\vgl}[2]{\parencite[vgl.][#1]{#2}}
+\newcommand{\zn}[3]{\parencite[#1, zit. nach][#2]{#3}}
 
 % Disable single lines at the start of a paragraph (Schusterjungen)
 \clubpenalty = 10000
@@ -144,8 +145,8 @@
 % Für diese Arbeit {{{
 
 % Fürs Kapital
-\newcommand{\gwg}{G--W--G'}
-\newcommand{\wgw}{W--G--W}
+\newcommand{\gwg}{G--W--G'\xspace}
+\newcommand{\wgw}{W--G--W\xspace}
 
 \newcommand{\hoe}{\tit{Homo oeconomicus}\xspace}
 
@@ -192,22 +193,21 @@ mttrud@gmail.com
 
 [EINLEITUNG ZUM HAUPTTEIL]
 
-In seinen Gouvernementalitätsstudien
-\parencites[vgl.][]{stb}{gbp}, aber auch schon im fünften Kapital von
-\citetitle{wzw} \pc{}{wzw} analysiert und diagnostiziert Michel
-Foucault das Aufkommen eines neuen Macht-Typs, der Bio-Macht, nach,
-aber ebenso  in, über und neben, der Disziplinar-Macht. \worries{Beide
-auf das Leben gerichtet? WzW, 134; und die sich folgendermaßen
-unterscheiden ...} Ebenso beschäftigt ihn dabei die Frage, wie ein
-Subjekt beschaffen sein muss, damit es sich auf diese Art und Weise
-regieren lässt. In \tit{Vorlesung 11} von \citetitle{gbp}
-\vgl{367-398}{gbp} analysiert Foucault deshalb die Figur des \hoe als
-eine spezifische Subjektform, die er bis zum englischen Empirismus
-zurückverfolgt, deren Wiederaufleben in ökonomischen Theorien
-neoliberaler Prägung ihn aber besonders interessiert. Er findet "`\hoe
-als Partner, als Gegenüber, als Basiselement der neuen
-gouvernementalen Vernunft, wie sie sich im 18. Jahrhundert ausbildet"'
-\pc{372}{gbp}.
+In seinen Gouvernementalitätsstudien \parencites[vgl.][]{stb}{gbp},
+aber auch schon im fünften Kapital von \citetitle{wzw} \pc{}{wzw}
+analysiert und diagnostiziert Michel Foucault das Aufkommen eines
+neuen Macht-Typs, der Bio-Macht, nach, aber ebenso  in, über und
+neben, der Disziplinar-Macht. \worries{Beide auf das Leben gerichtet?
+WzW, 134; und die sich folgendermaßen unterscheiden ...} Ebenso
+beschäftigt ihn dabei die Frage, wie ein Subjekt beschaffen sein muss,
+damit es sich auf diese Art und Weise regieren lässt. In
+\tit{Vorlesung 11} von \citetitle{gbp} \vgl{367-398}{gbp} analysiert
+Foucault deshalb die Figur des \hoe als eine spezifische Subjektform,
+die er bis zum englischen Empirismus zurückverfolgt, deren
+Wiederaufleben in ökonomischen Theorien neoliberaler Prägung ihn aber
+besonders interessiert. Er findet den "`\hoe als Partner, als
+Gegenüber, als Basiselement der neuen gouvernementalen Vernunft, wie
+sie sich im 18. Jahrhundert ausbildet"' \pc{372}{gbp}.
 
 In diesem Kontext betrachtet Foucault die Ausweitung ökonomischer
 Analysen auf Bereiche, die zunächst nicht ökonomisch scheinen oder
@@ -221,7 +221,7 @@ definiert, "`daß es ein zukünftiges Einkommen ermöglicht, welches der
 Lohn ist"' \pc{312}{gbp}.) Das besondere an diesem Kapital "`Arbeit"'
 ist aber natürlich, dass es "`praktisch untrennbar von der Person ist,
 die es besitzt"' \pc{312}{gbp} -- so die Begriffsbildung
-\tit{Human}kapital. Mit daran anknüpfenden Konzepten, etwa von
+\emph{Human}kapital. Mit daran anknüpfenden Konzepten, etwa von
 Investition ins (eigene) Humankapital, die dann auf eine weite Palette
 menschlichen Verhaltens angewandt werden kann -- von der Zeit, die
 Eltern mit ihren Kindern verbringen, über Gesundheitsvorsorge bis zur
@@ -231,14 +231,14 @@ allgemein ökonomisch als Verteilung "`knappe[r] Ressourcen auf
 alternative Zwecke"' \pc{310}{gbp} verstanden wird, zu erklären.
 
 Diese Zusammenlegung von Kapital und Mensch, oder noch spezifischer
-diese In-eins-Set\-zung von Kapital und Arbeit, scheint aber bereits auf
-den ersten Blick theoretische problematische Folgen für das
-vorgestellte Subjekt zu haben. Im folgenden werde ich deshalb die
-Konsequenzen untersuchen, die Bewegungen der Selbsterschließung, der
-Selbstverwertung, der Selbststeigerung, die von der Vorstellung des
-Humankapitals impliziert sind, für das Subjekt haben. Zunächst geht es
-aber um die ökonomische Fundierung des Begriffs des
-Humankapitals. Dafür Marx ...
+diese In-eins-Set\-zung von Kapital und Arbeit, scheint aber bereits
+auf den ersten Blick problematische theoretische \worries{und
+praktische?} Folgen für das vorgestellte Subjekt zu haben. Im
+folgenden werde ich deshalb die Konsequenzen untersuchen, die
+Bewegungen der Selbsterschließung, der Selbstverwertung, der
+Selbststeigerung, die von der Vorstellung des Humankapitals impliziert
+sind, für das Subjekt haben. Zunächst geht es aber um die ökonomische
+Fundierung des Begriffs des Humankapitals. Dafür Karl Marx ...
 
 \worries{Warum Marx?}
 
@@ -246,8 +246,118 @@ Humankapitals. Dafür Marx ...
 
 \subsubsection{Kapital bei Marx}
 
+\gwg ist die vielbeschworene Formel des Kapitals. Sie drückt aus, wie
+auf dem Umweg über eine bestimmte Ware (W) aus Geld (G) mehr Geld (G')
+wird.
+
+Nach dem Verständnis der Marx'schen Arbeitswerttheorie ist das Kapital
+eine Wertsumme, wobei allein Arbeit in der Lage ist, Wert zu schaffen.
+Allerdings ist das Kapital nicht einfach irgendeine Wertsumme, es ist
+der Wert \emph{in Bewegung}, in eben der Bewegung, die durch die Formel
+\gwg beschrieben wird.
+
+-- Steigerung
+
+Das Augenfälligste dieser Bewegung ist zunächst sicherlich, dass es
+einen entscheidenden Unterschied zwischen Anfang und Ende gibt,
+nämlich einen quantitativen. Am Ende der Bewegung steht mehr Geld als
+zu Beginn, \worries{sonst "`abgeschmackt"' (Marx)}.
+
+-- GWG vs WGW
+
+Diese Steigerung bestimmt Marx als die spezifische Logik des Kapitals.
+
+Wir befinden uns an dieser Stelle in der Zirkulationssphäre, in der
+Ware und Geld von Privateigentümer*innen als Äquivalente getauscht
+werden. Aus der einen Sicht stellt sich dieser Tausch als Verwandlung
+von Geld in Ware (G--W), aus der anderen Sicht als Verwandlung von
+Ware in Geld (W--G) dar. Aus diesem Bestandteilen lassen sich nun
+allerdings zwei verschiedene Ketten bilden, zum einen die schon
+erwähnte Bewegung \gwg, zum anderen die Bewegung \wgw. Der erste Fall
+ließe sich als "`Kaufen, um zu verkaufen"' beschreiben, der zweite als
+"`Verkaufen, um zu kaufen"'. Der entscheidene Unterschied liegt in der
+damit ausgesprochenen Zielsetzung: Das Ziel von \wgw ist der Austausch
+einer Ware gegen Geld, um damit eine andere Ware zu kaufen. Die
+Befriedigung eines Bedürfnisses mit der zweiten Ware, also ihr Entzug
+aus der Zirkulation durch den Konsum, ist das Ziel. So erhält die
+Bewegung \wgw unmittelbar einen ihr äußerlichen Zweck, und damit ihre
+Grenze und ihr Ende.
+
+Anders bei \gwg. Ziel ist hier einzig und allein die Vermehrung des
+Geldes, aber eben nicht zum Entzug aus der Zirkulation. Der Schatz ist
+kein Kapital. Das Geld, das über den Umweg seiner Verausgabung zu sich
+selbst zurückkommt als mehr Geld, ist die eigentümliche Existenzweise
+des Kapitals. Das Kapital ist sich Selbstzweck und besitzt damit keine
+äußeren Schranken und Zwecke. Die Bewegung der Steigerung ist endlos.
+
+-- endlos
+
+-- Keine Substanz
+
+Das Kapital existiert nur in der Bewegung. Hielte man es an, würde man
+das Geld sparen oder mit ihm eine Ware kaufen, die danach außerhalb
+der Zirkulation konsumiert würde, wäre das Ziel gewissermaßen verfehlt
+worden. Das Geld käme nicht als G' zu seinem Ausgangspunkt zurück.
+
+-- Form-Wechsel
+
+"`das Übergehen aus einer Phase in die andere [\lips] Das Kapital ist
+daher in jeder besonderen Phase die Negation seiner als des Subjekts
+der verschiednen Wandlungen"' \zn{Marx}{181}{reichelt}.
+
+Das Kapital "`ist immer sich selbst voraus, stets entgeht ein Rest der
+Zuschreibung"' \pc{125}{strauss}.
+
+"`prozessierender Widerspruch"'
+
+Selbst-Negation
+
+-- KAPITAL ALS SUBJEKT
+
+Das Kapital lässt sich schließlich als der sich selbst verwertende
+Wert bestimmen, als "`ein automatisches Subjekt"' \pc{169}{kap}.
+
+Das zirkulierende Kapital ist das "`Subjekt der beschriebenen
+Bewegung, die es selbst als sein eigner Verwertungsprozeß ist"'
+\zn{Marx}{181}{reichelt}.
+
 \subsubsection{Exkurs: Humankapital ein Kapital im Sinne der
 Arbeitswerttheorie?}
+
+In einem Vortrag aus dem Jahr ... beschäftigt sich Harald Strauß unter
+Anderem mit der Frage, ob das Humankapital ein Kapital im Sinne der
+Arbeitswerttheorie ist.
+
+"`Eine Arbeiterin ist mitnichten \emph{variables Kapital}, sondern es
+ist ihre Lohnsumme \emph{v}, die einen bestimmten Teil der
+Kapitalrechnung ausmacht"' \pc{126}{strauss}.
+
+"`Die Fähigkeiten eines abhängig Beschäftigten sind gerade aufgrund
+ihres Gebrauchswertcharakters von der Kapitalform ausgeschlossen"'
+\pc{126}{strauss}.
+
+"`Gute Bildung, Gesundheit und Manieren können durchaus nützlich sein,
+doch sind sie keine Bestandteile eines Kapitals, sie hecken kein Geld.
+Sie sind vielmehr, was auf dem jeweiligen Stand der
+Produktivkraftentwicklung von jeder Arbeitskraft erwartet werden darf,
+nichts, was die abhängig Beschäftigten je in die Position eines
+Unternehmers, vulgo: Kapitalisten bringe würde"' \pc{128}{strauss}.
+
+"`Letztlich ist es die Differenz von Arbeit und Arbeitskraft, die als
+Grundlage der Mehrwertabschöpfung eine Gleichsetzung von variablem
+Kapital mit Humankapital unterläuft: Weil die Differenz von Arbeit und
+Arbeitskraft nicht aktiv ausgenutzt werden kann von jenen, die ihre
+Haupt zu Markte tragen"' \pc{126}{strauss}
+
+"`Der Arbeitswerttheorie -- ob in den Varianten von Smith, Ricardo
+oder Marx -- ist der Begriff Humankapital gänzlich inkompatibel"'
+\pc{124}{strauss}.
+
+"`Um sich die Kapitalform zu geben, zumal die eines Humankapitals,
+müsste der Einzelne sich aufspalten, in einen Teil der die Arbeit
+gegen Lohn verkauft, und einen anderen Teil, der den Gebrauch von der
+ARbeit macht und das Mehrprodukt in Geldform einstreicht"'
+\pc{126}{strauss}.
 
 \subsubsection{Reformulierung für das Subjekt}
 
@@ -260,13 +370,27 @@ Steigerung --> Selbststeigerung usw.
 
 \subsubsection{Steigerungslogik, Hdgg. usw.}
 
+"`Selbstübermächtigung"'
+
+"`Wille will sich selbst"'
+
 \subsubsection{Diverses}
 
 \subsubsection{Neubestimmung des Subjekts}
 
+Reformulierung von Reichelt:
+
+"`am Ende der Darstellung wird sich zeigen, daß es das Kapital selbst
+ist, das uns in verschiedenen Formen begegnet, die sich alle als
+Momente seiner selbst erweisen"' \pc{181}{reichelt}.
+
+Besser \worries{?}: "`... daß es das Kapital selbst ist, das
+\emph{sich} in verschiedenen Formen begegnet"'
+
 \subsection{Schizophrenes Subjekt}
 
-\subsubsection{Schizophrenie bei Deleuze}
+%\subsubsection{Schizophrenie bei Deleuze}
+\subsubsection{Schizophrenie und Deleuze}
 
 \subsubsection{Schizophrenie und Kapitalismus}
 
