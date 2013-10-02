@@ -1,0 +1,283 @@
+% preamble {{{
+\documentclass[12pt,
+               DIV13,
+               paper=a4,
+               twoside=false,
+               onehalfspacing,
+               %titlepage,
+               bibliography=totoc,
+               toc=graduated,
+               draft,
+               ]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+%\usepackage{ngerman}
+%\usepackage[british]{babel}
+\usepackage[ngerman]{babel}
+\usepackage[babel,german=quotes]{csquotes}
+\usepackage{setspace}
+%\usepackage{mathptmx}           % pslatex's successor
+%\usepackage[scaled=.92]{helvet} % pslatex's successor
+%\usepackage{courier}            % pslatex's successor
+\usepackage[osf]{libertine}
+\usepackage{courier}
+% GEHT NICHT?:
+%\usefont{T1}{fxlj}{m}{n}\selectfont % Mit Zahlen, die nach unten hängen
+\usepackage{color}
+\usepackage{ifpdf}
+\usepackage{scrpage2}
+\usepackage{xspace}
+
+\usepackage[backend=biber,
+            sortlocale=de,
+            %style=authoryear,
+            %citestyle=authoryear-ibid,
+            citestyle=authoryear-icomp,
+            bibstyle=authoryear,
+            %natbib=true,
+            sortlos=los,
+            %autopunct=true,
+            language=ngerman,
+            clearlang=true,
+            %babel=none,
+            block=none,
+            %ibidtracker=constrict, % automatically set by authoryear-icomp
+            loccittracker=constrict, % no page-number after "ibidem" if the same page is cited again
+            ]{biblatex}
+\addbibresource{literatur.bib}
+
+\ifpdf
+ \usepackage[pdftex]{graphicx}
+ \DeclareGraphicsExtensions{.pdf}
+ \pdfcompresslevel=9
+% \usepackage[%
+%   pdftex=true,
+%   backref=true,
+%   linktocpage=true,
+%   pdfpagemode=None
+% ]{hyperref}
+% \hypersetup{
+%   pdftitle={},
+%   pdfauthor={Matthias Rudolph},
+%   pdfsubject={},
+%   pdfcreator={LaTeX2e and pdfLaTeX},
+%   pdfproducer={},
+%   pdfkeywords={}
+% }
+\else
+  \usepackage[dvips]{graphicx}
+  \DeclareGraphicsExtensions{.eps}
+\fi
+
+%\setcounter{secnumdepth}{-1} % keine section-Nummerierung
+
+\pagestyle{scrheadings}
+%\automark[section]{subsection}
+
+\ihead[]{}
+\chead[]{TITEL} % Name der Hausarbeit
+\ohead[]{Matthias Rudolph}
+\ifoot[]{}
+\cfoot[]{}
+\ofoot[]{\thepage} % Seitenzahl
+
+% Biblatex hacks
+%
+% Quick 'n' dirty
+% Richtiger Artikel für "Hrsg. *vom* Institut"
+\DefineBibliographyStrings{ngerman}{%
+    bytranslator = {hrsg\adddotspace vom},
+}
+
+% Kein "Bd." in \volcite (trotzdem per Komma getrennt)
+%\DeclareFieldFormat{volcitevolume}{#1}
+
+% Doppelpunkt statt Punkt nach dem Label
+\renewcommand{\labelnamepunct}{\addcolon\space}
+
+% Schrägstriche zwischen mehreren AutorInnen
+\renewcommand*{\multinamedelim}{\addslash}
+\renewcommand*{\finalnamedelim}{\addslash}
+
+% Alle Bibliografie-Einträge: Nachname, Vorname. Auch für Einträge
+% mit mehreren AutorInnen und die Sigel-Liste.
+% http://tex.stackexchange.com/questions/12806/guidelines-for-customizing-biblatex-styles
+\DeclareNameAlias{sortname}{last-first} % Bibliografie
+\DeclareNameAlias{default}{last-first} % Vollzitate (?)
+%\DeclareNameAlias{labelname}{last-first} % alle anderen Zitate
+
+% Nachname in Kapitälchen. Effekt aber nicht nur in der Bibliographie,
+% sondern auch bei Zitaten.
+%\renewcommand*{\mkbibnamelast}[1]{\textsc{#1}}
+
+% More space between different entries in the bibliography.
+% See \bibitemsep, \bibnamesep, \bibinitsep
+% http://tex.stackexchange.com/questions/19105/how-can-i-put-more-space-between-bibliography-entries-biblatex
+\setlength\bibnamesep{1em}
+
+\newcommand{\freel}{\vspace{1em}}
+\newcommand{\lips}{\dots\unkern}
+
+\newcommand{\tit}[1]{\textit{#1}}
+\newcommand{\tbf}[1]{\textbf{#1}}
+
+\newcommand{\pc}[2]{\parencite[#1]{#2}}
+\newcommand{\vgl}[2]{\parencite[vgl.][#1]{#2}}
+
+% Disable single lines at the start of a paragraph (Schusterjungen)
+\clubpenalty = 10000
+
+% Disable single lines at the end of a paragraph (Hurenkinder)
+\widowpenalty = 10000
+\displaywidowpenalty = 10000
+
+% Don't insert more space at the end of a sentence than between words.
+\frenchspacing
+
+% Worries in Blau
+\usepackage{ifdraft}
+\newcommand{\worries}[1]{\ifdraft{\textcolor{blue}{\texttt{(#1)}}}{}}
+
+% }}}
+
+% Für diese Arbeit {{{
+
+% Fürs Kapital
+\newcommand{\gwg}{G--W--G'}
+\newcommand{\wgw}{W--G--W}
+
+\newcommand{\hoe}{\tit{Homo oeconomicus}\xspace}
+
+% }}}
+
+% Titel {{{
+
+\begin{document}
+\setcounter{page}{0}
+
+\titlehead{Goethe-Universität Frankfurt\\
+Fachbereich Philosophie und Geschichtswissenschaften,\\
+Institut für Philosophie\\
+Prof. Dr. Christoph Menke\\
+Seminar: Demokratie und Kapitalismus,
+SoSe 2013\\
+Modul: VM 3b}
+\title{Das Subjekt des Humankapitals}
+\subtitle{Zwischen Steigerungslogik und Schizophrenie}
+\author{Matthias Rudolph}
+\date{Vorgelegt am: \today}
+
+\maketitle
+\vfill
+
+\noindent Matthias Rudolph\\
+Frankenallee 117\\
+60326 Frankfurt/M\\
+Matr.-Nr.: 5273120\\
+Mod. Mag. Philosophie (7. FS), NF Soziologie (3. FS) \& Politikwissenschaft (2. FS)\\ % anpassen
+mttrud@gmail.com
+\newpage
+
+\tableofcontents
+\newpage
+
+%}}}
+
+\section{Einleitung}
+
+\section{Hauptteil}
+
+\subsection{Humankapital}
+
+[EINLEITUNG ZUM HAUPTTEIL]
+
+In seinen Gouvernementalitätsstudien
+\parencites[vgl.][]{stb}{gbp}, aber auch schon im fünften Kapital von
+\citetitle{wzw} \pc{}{wzw} analysiert und diagnostiziert Michel
+Foucault das Aufkommen eines neuen Macht-Typs, der Bio-Macht, nach,
+aber ebenso  in, über und neben, der Disziplinar-Macht. \worries{Beide
+auf das Leben gerichtet? WzW, 134; und die sich folgendermaßen
+unterscheiden ...} Ebenso beschäftigt ihn dabei die Frage, wie ein
+Subjekt beschaffen sein muss, damit es sich auf diese Art und Weise
+regieren lässt. In \tit{Vorlesung 11} von \citetitle{gbp}
+\vgl{367-398}{gbp} analysiert Foucault deshalb die Figur des \hoe als
+eine spezifische Subjektform, die er bis zum englischen Empirismus
+zurückverfolgt, deren Wiederaufleben in ökonomischen Theorien
+neoliberaler Prägung ihn aber besonders interessiert. Er findet "`\hoe
+als Partner, als Gegenüber, als Basiselement der neuen
+gouvernementalen Vernunft, wie sie sich im 18. Jahrhundert ausbildet"'
+\pc{372}{gbp}.
+
+In diesem Kontext betrachtet Foucault die Ausweitung ökonomischer
+Analysen auf Bereiche, die zunächst nicht ökonomisch scheinen oder
+zumindest bisher nicht als ökonomisch betrachtet wurden, etwa Analysen
+der Kriminalität oder der Ehe \vgl{367}{gbp}. Ausgeweitet auf Analysen
+der Arbeit führen diese neoliberalen Analysen auf eine Vorstellung der
+Menschen als Humankapital, wobei "`Kapital"' in diesem Verständnis
+alles bezeichnet, "`was auf die eine oder andere Weise eine Quelle von
+zukünftigem Einkommen sein kann"' \pc{312}{gbp}. (Arbeit wird dann so
+definiert, "`daß es ein zukünftiges Einkommen ermöglicht, welches der
+Lohn ist"' \pc{312}{gbp}.) Das besondere an diesem Kapital "`Arbeit"'
+ist aber natürlich, dass es "`praktisch untrennbar von der Person ist,
+die es besitzt"' \pc{312}{gbp} -- so die Begriffsbildung
+\tit{Human}kapital. Mit daran anknüpfenden Konzepten, etwa von
+Investition ins (eigene) Humankapital, die dann auf eine weite Palette
+menschlichen Verhaltens angewandt werden kann -- von der Zeit, die
+Eltern mit ihren Kindern verbringen, über Gesundheitsvorsorge bis zur
+Mobilität, etwa der Bereitschaft umzuziehen \vgl{320}{gbp} --,
+versucht die neoliberale Theorie, menschliches Verhalten, das
+allgemein ökonomisch als Verteilung "`knappe[r] Ressourcen auf
+alternative Zwecke"' \pc{310}{gbp} verstanden wird, zu erklären.
+
+Diese Zusammenlegung von Kapital und Mensch, oder noch spezifischer
+diese In-eins-Set\-zung von Kapital und Arbeit, scheint aber bereits auf
+den ersten Blick theoretische problematische Folgen für das
+vorgestellte Subjekt zu haben. Im folgenden werde ich deshalb die
+Konsequenzen untersuchen, die Bewegungen der Selbsterschließung, der
+Selbstverwertung, der Selbststeigerung, die von der Vorstellung des
+Humankapitals impliziert sind, für das Subjekt haben. Zunächst geht es
+aber um die ökonomische Fundierung des Begriffs des
+Humankapitals. Dafür Marx ...
+
+\worries{Warum Marx?}
+
+\subsection{Kapital}
+
+\subsubsection{Kapital bei Marx}
+
+\subsubsection{Exkurs: Humankapital ein Kapital im Sinne der
+Arbeitswerttheorie?}
+
+\subsubsection{Reformulierung für das Subjekt}
+
+Selbstverwertung des Werts und Selbstverwertung des Subjekts
+
+Oder Erschließung --> Selbstverwertung
+Steigerung --> Selbststeigerung usw.
+
+\subsection{Subjekt}
+
+\subsubsection{Steigerungslogik, Hdgg. usw.}
+
+\subsubsection{Diverses}
+
+\subsubsection{Neubestimmung des Subjekts}
+
+\subsection{Schizophrenes Subjekt}
+
+\subsubsection{Schizophrenie bei Deleuze}
+
+\subsubsection{Schizophrenie und Kapitalismus}
+
+\subsubsection{Schizophrenie und Humankapital}
+
+\section{Aufräumen}
+
+\newpage
+\nocite{*}
+\printshorthands
+%\newpage
+\printbibliography
+
+\end{document}
