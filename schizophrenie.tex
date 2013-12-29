@@ -1,0 +1,665 @@
+% preamble {{{
+\documentclass[12pt,
+               DIV13,
+               paper=a4,
+               twoside=false,
+               onehalfspacing,
+               %titlepage,
+               bibliography=totoc,
+               toc=graduated,
+               draft,
+               ]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+%\usepackage{ngerman}
+%\usepackage[british]{babel}
+\usepackage[ngerman]{babel}
+\usepackage[babel,german=quotes]{csquotes}
+\usepackage{setspace}
+%\usepackage{mathptmx}           % pslatex's successor
+%\usepackage[scaled=.92]{helvet} % pslatex's successor
+%\usepackage{courier}            % pslatex's successor
+\usepackage[osf]{libertine}
+\usepackage{courier}
+% GEHT NICHT?:
+%\usefont{T1}{fxlj}{m}{n}\selectfont % Mit Zahlen, die nach unten hängen
+\usepackage{color}
+\usepackage{ifpdf}
+\usepackage{scrpage2}
+\usepackage{xspace}
+\usepackage[babel=true]{microtype}
+
+\usepackage[backend=biber,
+            sortlocale=de,
+            %style=authoryear,
+            %citestyle=authoryear-ibid,
+            citestyle=authoryear-icomp,
+            bibstyle=authoryear,
+            %natbib=true,
+            sortlos=los,
+            %autopunct=true,
+            language=ngerman,
+            clearlang=true,
+            %babel=none,
+            block=none,
+            %ibidtracker=constrict, % automatically set by authoryear-icomp
+            loccittracker=constrict, % no page-number after "ibidem" if the same page is cited again
+            ]{biblatex}
+\addbibresource{literatur.bib}
+
+\ifpdf
+ \usepackage[pdftex]{graphicx}
+ \DeclareGraphicsExtensions{.pdf}
+ \pdfcompresslevel=9
+% \usepackage[%
+%   pdftex=true,
+%   backref=true,
+%   linktocpage=true,
+%   pdfpagemode=None
+% ]{hyperref}
+% \hypersetup{
+%   pdftitle={},
+%   pdfauthor={Matthias Rudolph},
+%   pdfsubject={},
+%   pdfcreator={LaTeX2e and pdfLaTeX},
+%   pdfproducer={},
+%   pdfkeywords={}
+% }
+\else
+  \usepackage[dvips]{graphicx}
+  \DeclareGraphicsExtensions{.eps}
+\fi
+
+%\setcounter{secnumdepth}{-1} % keine section-Nummerierung
+
+\pagestyle{scrheadings}
+%\automark[section]{subsection}
+
+\ihead[]{}
+\chead[]{TITEL} % Name der Hausarbeit
+\ohead[]{Matthias Rudolph}
+\ifoot[]{}
+\cfoot[]{}
+\ofoot[]{\thepage} % Seitenzahl
+
+% Biblatex hacks
+%
+% Quick 'n' dirty
+% Richtiger Artikel für "Hrsg. *vom* Institut"
+\DefineBibliographyStrings{ngerman}{%
+    bytranslator = {hrsg\adddotspace vom},
+}
+
+% Kein "Bd." in \volcite (trotzdem per Komma getrennt)
+%\DeclareFieldFormat{volcitevolume}{#1}
+
+% Doppelpunkt statt Punkt nach dem Label
+\renewcommand{\labelnamepunct}{\addcolon\space}
+
+% Schrägstriche zwischen mehreren AutorInnen
+\renewcommand*{\multinamedelim}{\addslash}
+\renewcommand*{\finalnamedelim}{\addslash}
+
+% Alle Bibliografie-Einträge: Nachname, Vorname. Auch für Einträge
+% mit mehreren AutorInnen und die Sigel-Liste.
+% http://tex.stackexchange.com/questions/12806/guidelines-for-customizing-biblatex-styles
+\DeclareNameAlias{sortname}{last-first} % Bibliografie
+\DeclareNameAlias{default}{last-first} % Vollzitate (?)
+%\DeclareNameAlias{labelname}{last-first} % alle anderen Zitate
+
+% Nachname in Kapitälchen. Effekt aber nicht nur in der Bibliographie,
+% sondern auch bei Zitaten.
+%\renewcommand*{\mkbibnamelast}[1]{\textsc{#1}}
+
+% More space between different entries in the bibliography.
+% See \bibitemsep, \bibnamesep, \bibinitsep
+% http://tex.stackexchange.com/questions/19105/how-can-i-put-more-space-between-bibliography-entries-biblatex
+\setlength\bibnamesep{1em}
+
+\newcommand{\freel}{\vspace{1em}}
+\newcommand{\lips}{\dots\unkern}
+
+\newcommand{\tit}[1]{\textit{#1}}
+\newcommand{\tbf}[1]{\textbf{#1}}
+
+\newcommand{\pc}[2]{\parencite[#1]{#2}}
+\newcommand{\vgl}[2]{\parencite[vgl.][#1]{#2}}
+\newcommand{\zn}[3]{\parencite[#1, zit. nach][#2]{#3}}
+
+% Disable single lines at the start of a paragraph (Schusterjungen)
+\clubpenalty = 10000
+
+% Disable single lines at the end of a paragraph (Hurenkinder)
+\widowpenalty = 10000
+\displaywidowpenalty = 10000
+
+% Don't insert more space at the end of a sentence than between words.
+\frenchspacing
+
+% Worries in Blau
+\usepackage{ifdraft}
+\newcommand{\worries}[1]{\ifdraft{\textcolor{blue}{\texttt{(#1)}}}{}}
+
+% }}}
+
+% Für diese Arbeit {{{
+
+% Fürs Kapital
+\newcommand{\gwg}{G--W--G'\xspace}
+\newcommand{\wgw}{W--G--W\xspace}
+\newcommand{\cic}{Connect-I-cut\xspace}
+
+\newcommand{\hoe}{\tit{Homo oeconomicus}\xspace}
+
+% Footnote tricks
+% default:
+%\deffootnote[1em]{1.5em}{1em}{%
+%    \textsuperscript{\thefootnotemark}}
+
+%\deffootnote[1em]{1em}{1em}{%
+%    \textsuperscript{\thefootnotemark}}
+
+%\deffootnote[1em]{1.5em}{1em}{\thefootnotemark\enspace}
+
+%\deffootnote{1em}{1em}{\thefootnotemark\enspace}
+
+% }}}
+
+% Titel {{{
+
+\begin{document}
+\setcounter{page}{0}
+
+\titlehead{Goethe-Universität Frankfurt am Main\\
+Fachbereich Philosophie und Geschichtswissenschaften\\
+Institut für Philosophie\\
+Prof. Dr. Christoph Menke\\
+Seminar: Demokratie und Kapitalismus,
+SoSe 2013\\
+Modul: VM 3b}
+%\title{Das Subjekt des Humankapitals}
+%\title{Die Selbstverwertung des Selbst/Subjekts}
+\title{Xx}
+%\subtitle{Zwischen Steigerungslogik und Schizophrenie}
+\subtitle{Die schizophrene Struktur der Logik des Kapitals}
+\author{Matthias Rudolph}
+\date{Vorgelegt am: \today}
+
+\maketitle
+\vfill
+
+\noindent Matthias Rudolph\\
+Frankenallee 117\\
+60326 Frankfurt/M\\
+Matr.-Nr.: 5273120\\
+Mod. Mag. Philosophie (7. FS), NF Soziologie (3. FS) \& Politikwissenschaft (2. FS)\\ % anpassen
+mttrud@gmail.com
+\newpage
+
+\tableofcontents
+\newpage
+
+%}}}
+
+\section{Einleitung}
+
+Kombination zweier Thesen:
+
+Krankheit unserer Zeit (Adorno und Deleuze)
+
+Innere Komposition ableiten (Adorno)/Mechanismen (Deleuze)
+
+\section{Hauptteil}
+
+\subsection{Schizophrenie und Kapitalismus}
+
+\subsubsection{Schizophrenie}
+
+Auch wenn die Rede von einem gespaltenen Subjekt den Aufhänger für
+diesen Teil der Arbeit bildet, so ist doch die Diagnose der
+Schizophrenie, die Deleuze und Guattari formulieren, nicht einfach in
+der landläufigen Bedeutung als "`gespaltene Persönlichkeit"' zu
+übersetzen. Auch bei Deleuze und Guattari steckt dahinter ein
+medizinisch, psychologisch und philosophisch komplexes Konzept.
+
+Schizophrenie gilt in der Fachliteratur als Krankheit ohne
+einheitliches Krankheitsbild: "`\emph{Die} Schizophrenie als homogenes
+Krankheitsbild mit einheitlichem klinischem Erscheinungsbild und einem
+eindeutig vorhersagbaren Krankheitsverlauf mit immer wieder
+vergleichbaren ähnlichen Krankheitsstadien gibt es nicht"'
+\pc{799}{psych}.
+
+Dennoch lässt sich eine gewisse Bandbreite schizophrenen Verhaltens
+beschreiben: Die "`beiden Pole der Schizophrenie"' \pc{21}{schizg}
+sind die katatonischen Krampfzustände und die wahnhafte Aktivität
+oder, um es direkt in Deleuze'schen Begriffen zu sagen: "`Katatonie
+des organlosen Körpers, anorganische Tätigkeit der Organmaschinen"'
+\pc{21}{schizg}. Also auf der einen Seite eine "`Zersetzung der
+Person"' und eine "`Abspaltung von der Realität, die einem starren und
+sich selbst verschlossenen Innenleben eine Art Übergewicht oder
+Autonomie verleihen"' \pc{23}{schizg} -- das, was üblicherweise
+Autismus genannt wird \vgl{801}{psych}. Auf der anderen die
+"`Zersplitterung oder funktionale Dislokation der Assoziationen"'
+\pc{23}{schizg}, eine Betrachtung, "`die den fehlenden Zusammenhang
+zur Hauptstörung macht"' \pc{23}{schizg}.
+
+--
+
+Anders als vielen gängigen Interpretationen geht es Deleuze und
+Guattari aber darum, die Schizophrenie nicht im Sinne eines Mangels
+(etwa von Kontinuität, Konsistenz, Sinn, Signifikant, Vater o.\,ä.
+\vgl{xx}{schizg}) zu interpretieren, sie nicht auf die "`Merkmale des
+Defizits"', der "` Zerstörung"', der "`Lücken und Spaltungen"'
+\pc{24}{schizg} zu reduzieren. Stattdessen "`besteht die Schwierigkeit
+darin, der Schizophrenie in ihrer Positivität und als Positivität
+Rechnung zu tragen"' \pc{24}{schizg}.
+
+Das heißt die Schizophrenie als Prozess verstehen, aber nicht bloßes
+Fließen, etwa als kontinuierlichen Übergang zwischen verschiedenen
+schizophrenen Stadien. Prozess selbst wird verstanden als "`Bruch, Einbruch,
+Durchbruch, der die Kontinuität einer Persönlichkeit unterbricht und
+sie auf eine Art Reise schickt, durch ein intensives und
+erschreckendes \glq Mehr an Realität\grq{} hindurch, gemäß
+Fluchtlinien, in denen Natur und Geschichte, Organismus und Geist sich
+verfangen"' \pc{28}{schizg}. So ist die Schizophrenie die
+"`Herstellung einer nicht-lokalisierbaren Verbindung"' \pc{19}{schizg}
+zwischen heterogenen Elementen, so dass sie, "`\emph{gerade weil sie
+keine Beziehung zueinander haben}, untereinander in Beziehung treten"'
+\pc{19}{schizg}. Also Verbindung in der Unterbrechung, Strom durch den
+Einschnitt hindurch, weshalb es Deleuze und Guattari tatsächlich auch
+nicht einfach um "`gespaltene Persönlichkeiten"' geht: "`Spaltung ist
+ein schlechtes Wort zur Bezeichnung des Zustands"' \pc{27}{schizg},
+weil es nicht um zwei separate Einheiten geht, sondern um den "`Bruch,
+Einbruch, Durchbruch"', um die Differenz in der Einheit selbst.
+
+"`Das schizoide Werk par excellence"' \pc{54}{ao} sind "`Puzzleteile,
+die aber nicht zu einem, sondern verschiedenen Puzzles gehören:
+[\lips] mit ihren nicht zueinander passenden Rändern, die gewaltsam
+ineinandergezwängt, ineinandergeschachtelt werden und stets Reste
+übrig lassen"' \pc{54}{ao}.
+
+"`Man kann sagen, daß der Schizophrene [\lips] \emph{alle Codes
+durcheinanderbringt}"' \pc{22}{ao}. \worries{?}
+
+"`Wenn die Schizophrenie als die Krankheit der heutigen Zeit
+erscheint, dann nicht aufgrund von Allgemeinheiten, die unsere
+Lebensweise betreffen, sondern in bezug auf äußerst präzise
+Mechanismen ökonomischer, sozialer und politischer Natur"' \pc{28}{schizg}.
+
+\subsubsection{\dots und Kapitalismus}
+
+"`In der Tat meinen wir, daß der Kapitalismus im Zuge seines
+Produktionsprozesses eine ungeheure schizophrene Ladung erzeugt, auf
+der wohl seine Repression lastet, die sich aber unaufhörlich als
+Grenze des Prozesses reproduziert"' \pc{45}{ao}, so beschreiben
+Deleuze und Guattari den Zusammenhang von Kapitalismus und
+Schizophrenie. Die spezifischen Veränderungen, die sich mit dem
+Aufkommen des Kapitals ergeben, bezeichnen sie dabei als Decodierung
+und Deterritorialisierung -- zwei Begriffen, die im Kontext eines
+besonderen Vokabulars der Maschinen usw. \worries{?} stehen.
+
+Während frühere Gesellschaften (Deleuze und Guattari unterscheiden
+territoriale, despotische und kapitalistische Gesellschaften bzw.
+Gesellschaftsmaschinen \vgl{338}{ao}) gekennzeichnet waren von
+klaren Territorialitäten (Ländern, Zünften, Ethnien usw.) und Codes
+(z.\,B. der Zusammenhang von Konsumgütern und Prestige und die
+Übersetzung des einen ins andere) \vgl{318, 332}{ao} bzw.
+Übercodierung \worries{BSP}, sei das Besondere am Kapitalismus eben die allgemeine
+Decodierung und Deterritorialisierung \vgl{337}{ao}: "`Denn jedes
+Fließen des Stroms ist Deterritorialisierung, jede verschobene Grenze
+Decodierung"' \pc{298}{ao}.
+
+Was hier so vielleicht noch so undeutlich klingt, wird ganz
+anschaulich zum Beispiel mit Blick auf Marx' Analyse der sogenannten
+ursprünglichen Akkumulation: Kurz gesagt war es eine Bedingung für das
+Entstehen des Kapitalismus, dass sich doppelt-freie Lohnarbeiter*innen
+und Geld, das zu ihrer Bezahlung ausgegeben werden konnte, begegnet
+sind \vgl{xx}{kap}. Deleuze fasst dies in Begriffen der Decodierung
+und Deterritorialisierung, die für ihn den Kapitalismus kennzeichnen:
+"`Tatsächlich entsteht er [der Kapitalismus] aus dem Zusammentreffen
+zweier Arten von Strömen: den decodierten Produktionsströmen in Form
+des Geld-Kapitals und den decodierten Arbeitsströmen in Form des \glq
+freien Arbeiters\grq\,"' \pc{44}{ao}.
+
+\worries{Aber immer wieder Axiomatik, neue Axiome}
+
+\worries{Mehr: Organloser voller Körper usw.}
+
+--
+
+Zu den Mechanismen: "`Wir haben gesehen, daß das Verhältnis von
+Kapitalismus und Schizophrenie bei weitem über die Probleme der
+Lebensweise, der Umwelt, der Ideologie usw. hinausgeht, und auf der
+grundlegenden Ebene ein und derselben Ökonomie, ein und desselben
+Produktionsprozesses gesehen werden muß. Unsere Gesellschaft
+produziert Schizos wie Haarwaschmittel oder wie VWs mit dem einzigen
+Unterschied, daß jene nicht ver-|käuflich sind"' \pc{S. 315 f.}{ao}.
+
+--> Lenger, das Erste ist das Dritte
+
+---
+
+Kapitalismus und Schizophrenie: beide Decodierung usw.
+
+"`Ist es in diesem Sinne richtig zu sagen, daß die Schizophrenie das
+Produkt der kapitalistischen Maschine sei, wie die depressive Manie
+und die Paranoia Produkt der Despotenmaschine und die Hysterie Produkt
+der Territorialmaschine?"' \pc{44}{ao}.
+
+"`Im Differentialquotienten ist die grundlegende kapitalistische
+Erscheinung zum Ausdruck gebracht: \emph{die Transformation des
+Mehrwerts an Code in Mehrwert an Strömen}"' \pc{S. 292 f.}{ao}.
+
+"`Die Tendenz besitzt einzig eine interne Grenze [aber keine äußere],
+die sie überschreitet, allerdings indem sie sie verschiebt, das heißt
+sie rekonstituiert, sie als interne Grenze, die erneut mittels
+Verschiebung überschritten \worries{Selbst-Überschreitung} werden muß,
+wiederfindet: so erzeugt sich die Kontinuität des kapitalistischen
+Prozesses in diesem stets verschobenen Einschnitt des Einschnitts
+(coupure de coupure), anders gesagt in der \emph{Einheit von Spaltung
+(schize) und Strom}"' \pc{S. 296, meine Hervorh.}{ao}.
+
+% GWG {{{
+
+\subsection{\gwg}
+
+\gwg lautet die vielbeschworene Formel des Kapitals. Sie drückt aus,
+wie auf dem Umweg über eine bestimmte Ware (W) aus Geld (G) mehr Geld
+(G') wird. Nach der Marx'schen Arbeitswerttheorie ist das Kapital eine
+Wertsumme, wobei allein Arbeit in der Lage ist, Wert zu schaffen
+\vgl{181}{kap}. Allerdings ist das Kapital nicht einfach irgendeine
+Wertsumme, es ist der Wert \emph{in Bewegung}, in eben der Bewegung,
+die durch die Formel \gwg beschrieben wird.
+
+%-- GWG vs WGW
+
+%-- WGW
+
+Wir befinden uns an dieser Stelle in der sogenannten
+Zirkulationssphäre, in der Privateigentümer*innen Waren und Geld als
+Äquivalente tauschen. Von der einen Seite stellt sich dieser Tausch
+als Verwandlung von Ware in Geld (W--G), von der anderen Seite als
+Verwandlung von Geld in Ware (G--W) dar. Diese Bausteine lassen sich
+nun allerdings auf zwei verschiedene Weisen verketten, zum einen als
+\wgw, zum anderen umgekehrt als G--W--G. Der erste Fall ließe sich als
+"`Verkaufen, um zu kaufen"' beschreiben, der zweite als "`Kaufen, um
+zu verkaufen"' \vgl{162}{kap}. Der entscheidene Unterschied liegt in
+der damit ausgesprochenen Zielsetzung: Das Ziel von \wgw ist der
+Austausch einer Ware gegen Geld, um damit eine andere Ware zu kaufen.
+%"`Das Geld ist also definitiv ausgegeben"' \pc{163}{kap}.
+Die Befriedigung eines Bedürfnisses mit der zweiten Ware, also ihr
+Entzug aus der Zirkulation durch den Konsum, ist das Ziel. So besitzt
+der Kreislauf \wgw einen ihm äußerlichen Zweck, und damit seine Grenze
+und sein Ende. "`Konsumtion, Befriedigung von Bedürfnissen, mit einem
+Wort, Gebrauchswert ist daher sein Endzweck"' \pc{164}{kap}.
+
+%-- GWG
+
+Anders mit G--W--G. Ziel ist hier nicht der Entzug einer Ware aus der
+Zirkulation, und ebensowenig der Entzug des Geldes. Es wird vielmehr
+ausgegeben, in die Zirkulation hineingeworfen, damit es am Ende
+zurückkommt. Das Geld ist "`nur vorgeschossen"' \pc{163}{kap}. Nun
+wäre die ganze Bewegung "`eine ebenso zwecklose als abgeschmackte
+Operation"' \pc{165}{kap} und die Mühe sinnlos, stünde am Ende als
+Resultat nur "`tautologisch"' \pc{164}{kap} das, womit begonnen wurde,
+nachdem es obendrein einmal dem Risiko des Verlusts ausgesetzt war.
+Der bloße Erhalt des Werts kann also nicht das Ziel sein. Ebensowenig
+geht es aber um Erreichung eines vom Anfang qualitativ verschiedenen
+Endpunkts. Denn: "`Eine Geldsumme kann sich von der andren Geldsumme
+überhaupt nur durch ihre Größe unterscheiden. Der Prozeß G--W--G
+schuldet seinen Inhalt daher keinem qualitativen Unterschied seiner
+Extreme, denn sie sind beide Geld, sondern nur ihrer quantitativen
+Verschiedenheit"' \pc{165}{kap}. Der Inhalt dieser Bewegung besteht
+also darin, dass an ihrem Ende \emph{mehr} Geld steht als am Anfang.
+An die Stelle des qualitativen Unterschieds der beiden Waren in \wgw
+tritt hier ein quantitativer Unterschied der beiden
+Geldsummen.\footnote{Das Rätsel, woher diese Differenz, d.\,h. diese
+Vergrößerung der Wertsumme kommt, löst Marx durch die Einführung der
+Differenz von Arbeit und Arbeitskraft und die Verschiebung des
+Blickwinkels von der Zirkulation auf die Produktion. Die Ware
+Arbeitskraft kann in der Zirkulation gekauft werden. Ihr spezifischer
+Gebrauchswert ist aber Arbeit, also wertbildende Tätigkeit, die im
+Produktionsprozess verausgabt wird \vgl{xx}{kap}. Die Betrachtung der
+besonderen Ware Arbeitskraft, wie der ganzen Sphäre der Produktion,
+lasse ich an dieser Stelle außen vor. Für die Bestimmung der
+Steigerungslogik des Kapitals ist es unerheblich, woher die Steigerung
+kommt, solange sie nur nicht als zufällige Nebenerscheinung verstanden
+wird.\worries{?}} Aus der zweiten Art, die Bausteine G--W und W--G
+zusammenzusetzen, wird also \gwg, mit G'$>$G.
+
+%-- Steigerung / endlos / maßlos
+
+Hier "`sind Anfang und Ende dasselbe, Geld, Tauschwert, und schon
+dadurch ist die Bewegung endlos"' \pc{166}{kap}. Es handelt sich nicht
+um einen einfachen Kreislauf, es kreist nicht immer unterschiedslos
+die gleiche Wertsumme, sondern um eine Bewegung, die jeweils auf einer
+höheren Stufe wiederholt wird. "`Das Ende jedes einzelnen Kreislaufs
+[\lips] bildet daher von selbst den Anfang eines neuen Kreislaufs"'
+\pc{S. 166 f.}{kap}. Und jedes Mal steht am Ende eine Vermehrung der
+eingesetzten Wertsumme. Zum Ziel dieser endlos wiederholten Operation
+wird einzig die Vermehrung des Geldes, aber eben nicht zum Entzug aus
+der Zirkulation. Würde die Bewegung angehalten, "`hörten [die
+beispielhaften 100 Pfd. St.] auf, Kapital zu sein. Der Zirkulation
+entzogen, versteinern sie zum Schatz"' \pc{166}{kap}. "`Die
+Zirkulation des Geldes als Kapital ist dagegen Selbstzweck, denn die
+Verwertung des Werts existiert nur innerhalb dieser stets erneuerten
+Bewegung"' \pc{167}{kap}.
+
+%Dass am Ende eines Zyklus aus Geld mehr Geld geworden ist, bestimmt
+%Marx als die spezifische Steigerungslogik des Kapitals. Dabei geht es
+%nicht um die Einzelfälle, in denen geschickte Händlerinnen ungeschickte
+%Käuferinnen übers Ohr hauen, sondern die Wertzunahme, die Produktion
+%von Mehrwert, ohne die das Kapital kein Kapital ist.
+
+%== Zu den Besonderheiten/Widersprüchlichkeiten dieser Bestimmung
+
+%-- Form-Wechsel / Keine Substanz
+
+Neben dieser spezifischen Steigerungslogik des Kapitals ist an dieser
+Stelle aber insbesondere die Form der Bewegung von Interesse. Kapital
+ist nicht einfach Geld, was aus sich selbst mehr Geld macht, wie im
+"`Lapidarstil"' \pc{170}{kap} das zinstragende Kapital vorgestellt ist
+und was zugegebenermaßen schon eine bemerkenswerte Eigenschaft wäre.
+In seiner allgemeinen Form ist Kapital Geld, das über den Umweg seiner
+Verausgabung als mehr Geld zu sich selbst zurückkommt. Es handelt sich
+also nicht nur um eine Vermehrung, eine Steigerung, sondern obendrein
+um eine Selbst-Verausgabung und eine Identität durch diese
+Verausgabung hindurch. Das Kapital ist Kapital durch einen zweifachen
+Wechsel der Form, einmal von Geld zu Ware und einmal von Ware zurück
+zu Geld: "`beide, Ware und Geld, [funktionieren] nur als verschiedne
+Existenzweisen des Werts selbst [\lips] Er geht beständig aus der
+einen Form in die andre über, ohne sich in dieser Bewegung zu
+verlieren"' \pc{S. 168 f.}{kap}.
+
+%-- Kapital als Subjekt
+
+Ein Satz von Helmut Reichelt müsste an dieser Stelle reformuliert
+werden. Er sagte: "`am Ende der Darstellung wird sich zeigen, daß es
+das Kapital selbst ist, das uns in verschiedenen Formen begegnet, die
+sich alle als Momente seiner selbst erweisen"' \pc{181}{reichelt}.
+Passender noch wäre es zu sagen, "`daß es das Kapital selbst ist, das
+\emph{sich} in verschiedenen Formen begegnet"'. Selbst angetrieben,
+die ständigen Verwandlungen überstehend, wird das Kapital zum
+"`übergreifende[n] Subjekt"' \pc{169}{kap} seiner eigenen Verwertung.
+Das Kapital ist das "`Subjekt der beschriebenen Bewegung, die es
+selbst als sein eigner Verwertungsprozeß ist"'
+\zn{Marx}{181}{reichelt}. In der Bewegung der Selbstverwertung nennt
+Marx das Kapital schließlich "`automatisches Subjekt"' \pc{169}{kap},
+es ist "`selbst der prozessierende Widerspruch"' \pc{601}{grundr}.
+
+%"`, und verwandelt sich so in ein automatisches Subjekt"' \pc{S. 168 f.}{kap}.
+
+%\worries{vs. S. 169, wo Marx den Wert "`Substanz"' nennt}
+
+%Das Kapital "`ist immer sich selbst voraus, stets entgeht ein Rest der
+%Zuschreibung"' \pc{125}{strauss}. Selbstüberschreitung
+
+%"`In der Tat aber wird der Wert hier das Subjekt eines Prozesses,
+%worin er unter dem beständigen Wechsel der Formen von Geld und Ware
+%seine Größe selbst verändert, sich als Mehrwert von sich selbst als
+%ursprünglichem Wert abstößt, sich selbst verwertet. Denn die Bewegung,
+%worin er Mehrwert zusetzt, ist seine eigne Bewegung, seine Verwertung
+%also Selbstverwertung"' \pc{169}{kap}.
+
+%-- Widerspruch / Selbst-Negation
+
+Am bemerkenswertesten ist aber eine Formulierung, die Helmut Reichelt
+zitiert: "`Das Kapital ist daher in jeder besonderen Phase die
+Negation seiner als des Subjekts der verschiednen Wandlungen"'
+\zn{Marx}{181}{reichelt}. Diese eigentümliche Bewegung des Kapitals,
+die über einen Umweg zu sich selbst zurückkommt, wird hier verstanden
+als Negation.
+
+Die Identität des Kapitals lässt sich nur noch bestimmen als
+substanzlose Identität in der Differenz der Steigerung und der
+zweifachen Verwandlung, ja der Selbst-Negation. \worries{?}
+
+% das sich selbstnegierende Subjekt
+
+% }}}
+
+\subsection{Die Schizophrenie der Logik: Connect-I-cut}
+
+Beinahe nebenbei werfen Deleuze und Guattari ein kleines Wortspiel
+ein, das mir aber von besonderer Anschaulichkeit zu sein scheint.
+Durch Einfügung von zwei Bindestriche, durch zwei Schnitte, wird aus
+\emph{Connecticut} "`Connect -- I -- cut"' \pc{48}{ao} (wobei ich
+dieses Wortspiel natürlich von seiner Territorialität, nämlich dem
+US-Bundesstaat lösen möchte). In der Zerschneidung des
+Namens und dem Zusammenspiel seiner drei Teile \emph{connect},
+\emph{I} und \emph{cut} wird deutlich, was den schizophrenen Prozess
+ausmacht: Kontinuität im Bruch, Kontinuität durch den Einschnitt
+hindurch, ja sogar das \emph{I}, das Ich, das Subjekt, das "`ich"'
+sagt, taucht an der Stelle zwischen Verbindung und Schnitt auf,
+befindet sich gewissermaßen mitten im Schnitt. Connect -- I -- cut ist
+die "`Einheit von Spaltung (schize) und Strom"' \pc{296}{ao}, eine
+Einheit, die sich nur als Differenz denken lässt.
+
+Und genau in diesem Sinne lässt sich jetzt auch \gwg verstehen: als
+Kontinuität im Bruch, als Identität im Von-sich-selbst-Abstoßen des
+Mehrwerts vom ursprünglichen Wert, Identität in der Differenz (zu sich
+selbst), also schizophrene Reise. In der Überschreitung der eigenen
+inneren Grenzen und deren unablässiger Reproduktion, dieser endlosen
+Selbst-Ü\-ber\-schrei\-tung, "`erzeugt sich die Kontinuität des
+kapitalistischen Prozesses in diesem stets verschobenen Einschnitt des
+Einschnitts (coupure de coupure), anders gesagt in der Einheit von
+Spaltung (schize) und Strom"' \pc{296}{ao}.
+
+--
+
+Keine einfache Parallelität, im Sinne von:
+%
+\begin{tabular}{c@{ - }c@{ - }c}
+Connect & I & cut\\
+G & W & G'
+\end{tabular}
+
+Diese Gegenüberstellung würde die Eigentümlichkeiten beider Formeln
+verfehlen. Stattdessen muss es darum gehen, die ganze Bewegung des
+Kapitals \gwg im Sinne von \cic zu verstehen.
+
+\subsubsection{Connect/Cut -- Cut/Connect}
+
+Besondere Bedeutung hat im Kontext der Schizophrenie die Verbindung
+von Verbindung und Unterbrechnung, von Strom und Einschnitt, von
+Connect und Cut.
+
+"`die einzige identitätslose Einheit ist jene des Spaltungs-Stroms
+oder des Strom-Einschnitts"' \pc{314}{ao}.
+
+"`Kurz gesagt, der Begriff des Spaltungs-Stroms oder Strom-Einschnitts
+schien uns den Kapitalismus wie die Schizophrenie gleichermaßen zu
+bestimmen"' \pc{317}{ao}.
+
+\subsubsection{G--X?--G': Die Bedeutung der Ware}
+
+"`In der ersten Form [\wgw] vermittelt das Geld, in der anderen [\gwg]
+umgekehrt die Ware den Gesamtverlauf"' \pc{163}{kap}.
+
+Ware als Einschnitt.
+
+Im Schnitt passiert etwas "`hinter ihrem Rücken"' \pc{181}{kap} (dem
+Rücken der Zirkulation, wo die Bewegung \gwg ansonsten spielt).
+
+Außerhalb der Zirkulation, als im Schnitt, setzt die Ware Wert zu.
+Hier findet die Produktion von Mehrwert statt, ohne dass in der
+Zirkulation jemand übervorteilt würde. Der Schlüssel dafür ist die
+besondere Ware Arbeitskraft, deren Gebrauch wertbildende Tätigkeit,
+also Arbeit ist.
+
+Die Existenzbedingungen des Kapitals liegen also außerhalb des
+eigentlichen Kapital-Kreislaufs. Erst mit der Rückverwandlung der Ware
+in G' sind sie erfüllt und das erste G \emph{war} Kapital. Dafür
+braucht es den Schnitt im Strom.
+
+Die Bedinungen liegen also außerhalb und erfüllen sich nur
+nachträglich. Ohnehin handelt es sich um die Identitätsbedingungen
+einer Bewegung, nicht von einer Substanz. Es geht also um die
+Identität einer Bewegung, einer unterbrochenen Bewegung, einer
+Identität im Schnitt und durch den Schnitt, also wegen des Schnitts
+und durch ihn hindurch.
+
+Ohne Unterbrechnung, ohne Verwandlung in Ware, gäbe es auch keine
+Identität, zumindest keine des Kapitals, denn das Geld bliebe einfach
+Geld und würde sich nicht von der Stelle rühren. Von Kapital könnte
+keine Rede sein.
+
+\subsubsection{Connect-I!-cut: Das Kapital als schizophrenes Subjekt}
+
+Die Bewegung des Kapitals, also \gwg im Gegensatz zu \wgw verliere
+"`Sinn und Verstand"' \pc{166}{kap}, sagte schon Marx. Dabei geht es
+um den Wert als Subjekt seiner eigenen Verwertung: "`In der Tat aber
+wird der Wert hier das Subjekt eines Prozesses, worin er unter dem
+beständigen Wechsel der Formen von Geld und Ware seine Größe selbst
+verändert, sich als Mehrwert von sich selbst als ursprünglichem Wert
+abstößt, sich selbst verwertet"' \pc{169}{kap}. Der Wert soll sich
+also als Mehrwert von sich selbst als ursprünglichem Wert abstoßen.
+Von einer einfachen Identität kann hier jedenfalls keine Rede sein.
+Vielmehr gibt es bereits drei Einheiten, Wert, ursprünglicher Wert und
+Mehrwert, die irgendwie zueinander in Beziehung stehen. Diese
+Beziehung ist eine Beziehung der Zusammenfassung im Wert, dem neuen
+Wert, als auch eine der Abstoßung, des neuen Werts als Mehrwert über
+den alten.
+
+Außerdem spielt eine besondere Zeitlichkeit eine Rolle. Ein bestimmtes
+Hinterher wird zur Bedingung der Identität \emph{in the first place}.
+Deutlicher wird dies, wenn die Bewegung noch einmal in Begriffen des
+Kapitals reformuliert wird. Kapital ist nur jene Wertsumme, die als
+eine größere Wertsumme zu sich selbst zurückkommt, oder, ausgedrückt
+in Geld, Geld, das als mehr Geld den Zirkel schließt. \worries{Falte}
+Hier wird deutlich, dass die Identitätsbedingungen des Kapitals sich
+immer nur hinterher realisiert haben. Nur hinterher lässt sich sagen,
+ob das zu Beginn eingesetzte Geld Kapital \emph{war}, als Kapital
+fungiert \emph{hat}. Das Kapital "`ist immer sich selbst voraus"'
+\pc{125}{strauss}. Und diese Differenz von ursprünglichem Wert und
+Mehrwert bildet die Grundlage und die Bedingung des neuen Werts, der
+seinerseits sofort wieder nur "`ursprünglicher"' Wert eines neuen
+Kreislaufs ist, sonst wäre er kein Kapital gewesen:
+%
+\begin{spacing}{1}
+\begin{quote}
+"`Er [der Wert] unterscheidet sich als ursprünglicher
+Wert von sich selbst als Mehrwert, als Gott Vater von sich selbst als
+Gott Sohn, und beide sind vom selben Alter und bilden in der Tat nur
+eine Person, denn nur durch den Mehrwert von 10 Pfd. St. werden die
+vorgeschossenen 100 Pfd. St. Kapital, und sobald sie dies geworden,
+sobald der Sohn und durch den Sohn der Vater erzeugt, verschwindet ihr
+Unterschied wieder und sind beide Eins, 110 Pfd. St."' \pc{S. 169
+f.}{kap}.
+\end{quote}
+\end{spacing}
+
+\subsection{xxx}
+
+\section{Fazit: Ausblicke und Fluchtlinien}
+
+verschiedene schizophrene Subjekte
+
+\newpage
+%\nocite{*}
+\printshorthands
+%\newpage
+\printbibliography
+
+\end{document}
